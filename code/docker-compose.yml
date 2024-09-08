@@ -295,6 +295,8 @@ services:
   functions:
     image: supabase/edge-runtime:v1.56.1
     restart: unless-stopped
+    networks:
+      - easypanel-production-palmem
     depends_on:
       analytics:
         condition: service_healthy
