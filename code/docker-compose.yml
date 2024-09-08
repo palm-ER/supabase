@@ -11,6 +11,8 @@ services:
   studio:
     image: supabase/studio:20240729-ce42139
     restart: unless-stopped
+    networks:
+      - easypanel-production-palmem
     healthcheck:
       test:
         [
@@ -54,6 +56,8 @@ services:
     depends_on:
       analytics:
         condition: service_healthy
+    networks:
+      - easypanel-production-palmem
     environment:
       KONG_DATABASE: "off"
       KONG_DECLARATIVE_CONFIG: /home/kong/kong.yml
@@ -78,6 +82,8 @@ services:
         condition: service_healthy
       analytics:
         condition: service_healthy
+    networks:
+      - easypanel-production-palmem
     healthcheck:
       test:
         [
@@ -141,6 +147,8 @@ services:
 
   rest:
     image: postgrest/postgrest:v12.2.0
+    networks:
+      - easypanel-production-palmem
     depends_on:
       db:
         # Disable this if you are using an external Postgres database
@@ -161,6 +169,8 @@ services:
   realtime:
     # This container name looks inconsistent but is correct because realtime constructs tenant id by parsing the subdomain
     image: supabase/realtime:v2.30.23
+    networks:
+      - easypanel-production-palmem
     depends_on:
       db:
         # Disable this if you are using an external Postgres database
@@ -204,6 +214,8 @@ services:
   # To use S3 backed storage: docker compose -f docker-compose.yml -f docker-compose.s3.yml up
   storage:
     image: supabase/storage-api:v1.10.1
+    networks:
+      - easypanel-production-palmem
     depends_on:
       db:
         # Disable this if you are using an external Postgres database
@@ -246,6 +258,8 @@ services:
 
   imgproxy:
     image: darthsim/imgproxy:v3.8.0
+    networks:
+      - easypanel-production-palmem
     healthcheck:
       test: ["CMD", "imgproxy", "health"]
       timeout: 5s
@@ -261,6 +275,8 @@ services:
 
   meta:
     image: supabase/postgres-meta:v0.83.2
+    networks:
+      - easypanel-production-palmem
     depends_on:
       db:
         # Disable this if you are using an external Postgres database
@@ -299,6 +315,8 @@ services:
 
   analytics:
     image: supabase/logflare:1.4.0
+    networks:
+      - easypanel-production-palmem
     healthcheck:
       test: ["CMD", "curl", "http://localhost:4000/health"]
       timeout: 5s
@@ -349,7 +367,6 @@ services:
         condition: service_healthy
     networks:
       - easypanel-production-palmem
-      - production-palmem_supabase_default
     command:
       - postgres
       - -c
@@ -384,6 +401,8 @@ services:
 
   vector:
     image: timberio/vector:0.28.1-alpine
+    networks:
+      - easypanel-production-palmem
     healthcheck:
       test:
         [
