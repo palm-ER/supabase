@@ -349,6 +349,7 @@ services:
         condition: service_healthy
     networks:
       - easypanel-production-palmem
+      - production-palmem_supabase_default
     command:
       - postgres
       - -c
