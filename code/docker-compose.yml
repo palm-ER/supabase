@@ -347,6 +347,8 @@ services:
     depends_on:
       vector:
         condition: service_healthy
+    networks:
+      - easypanel-production-palmem
     command:
       - postgres
       - -c
@@ -403,3 +405,7 @@ services:
 
 volumes:
   db-config:
+networks:
+  easypanel-production-palmem:
+    name: easypanel-production-palmem
+    external: true
