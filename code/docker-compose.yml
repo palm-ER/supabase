@@ -11,17 +11,6 @@ services:
   studio:
     image: supabase/studio:20240729-ce42139
     restart: unless-stopped
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "node",
-          "-e",
-          "require('http').get('http://localhost:3000/api/profile', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})",
-        ]
-      timeout: 5s
-      interval: 5s
-      retries: 3
     depends_on:
       analytics:
         condition: service_healthy
