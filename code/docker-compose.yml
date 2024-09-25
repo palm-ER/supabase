@@ -212,19 +212,6 @@ services:
         condition: service_started
       imgproxy:
         condition: service_started
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "--no-verbose",
-          "--tries=1",
-          "--spider",
-          "http://localhost:5000/status",
-        ]
-      timeout: 5s
-      interval: 5s
-      retries: 3
     restart: unless-stopped
     environment:
       ANON_KEY: ${ANON_KEY}
