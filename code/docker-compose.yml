@@ -355,7 +355,7 @@ services:
       # Use named volume to persist pgsodium decryption key between restarts
       - db-config:/etc/postgresql-custom
   networks:
-    production-palmem_supabase_default:
+    network1:
       name: easypanel-production-palmem
       external: true
 
