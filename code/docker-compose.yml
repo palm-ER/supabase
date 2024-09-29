@@ -383,6 +383,5 @@ volumes:
 
 networks:
   easypanel-production-palmem:
-    name: easypanel-production-palmem
     external: true
 
