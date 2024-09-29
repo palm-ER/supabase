@@ -382,7 +382,7 @@ volumes:
   db-config:
 
 networks:
-  production-palmem_supabase_default:
+  	easypanel-production-palmem:
     name: easypanel-production-palmem
     external: true
 
