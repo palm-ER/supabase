@@ -381,7 +381,4 @@ services:
 volumes:
   db-config:
 
-networks:
-  easypanel-production-palmem:
-    external: true
 
